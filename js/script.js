@@ -1,11 +1,30 @@
 $(document).ready(function() {
 			//Only needed for the filename of export files.
 			//Normally set in the title tag of your page.document.title = 'Simple DataTable';
-			//Define hidden columns
-			var hCols = [3, 4];
+			//Define hidden columns by index
+			var hCols = [0];
 			// DataTable initialisation
 			$('#example').DataTable({
-				"dom": "<'row'<'col-sm-4'B><'col-sm-2'l><'col-sm-6'p<br/>i>>" + "<'row'<'col-sm-12'tr>>" + "<'row'<'col-sm-12'p<br/>i>>",
+				"dom": 
+    				// Primeira linha: controles no topo da tabela
+    				"<'row' "+ 
+						"<'col-sm-4'B>"  +  // Coluna de largura 4: área para botões (ex: exportar, adicionar)
+    				    "<'col-sm-2'l>" +   //Seletor de número de linhas (ex: 10, 25, 50) 
+    				    //"<'col-sm-6'p <br/>i>" + // Coluna de largura 6: controles de paginação (ex: botões de "próxima" e "anterior") + Informações adicionais 
+					">" +  
+    				
+					// Segunda linha: tabela principal					
+    				"<'row' "+
+						"<'col-sm-12'tr>>" + // Toda a largura (col-sm-12): área para o conteúdo da tabela (dados)
+
+    				// Terceira linha: controles no final da tabela
+					
+    				"<'row'"+
+					 	"<'col-sm-12'p <br/>i>" + // Paginação (ex: controle de navegação de páginas) + Informações adicionais (ex: "Mostrando 1 a 10 de X registros")
+					">",          
+
+				"lengthChange": false, // Habilita o seletor de linhas
+				"pageLength": 10,    // Define o número de linhas padrão do grid
 				"paging": true,
 				"autoWidth": true,
 				"columnDefs": [{
@@ -40,21 +59,6 @@ $(document).ready(function() {
 							text: 'CSV',
 							extend: 'csvHtml5',
 							fieldSeparator: ';',
-							exportOptions: {
-								columns: ':visible'
-							}
-						}, {
-							text: 'PDF Portrait',
-							extend: 'pdfHtml5',
-							message: '',
-							exportOptions: {
-								columns: ':visible'
-							}
-						}, {
-							text: 'PDF Landscape',
-							extend: 'pdfHtml5',
-							message: '',
-							orientation: 'landscape',
 							exportOptions: {
 								columns: ':visible'
 							}
